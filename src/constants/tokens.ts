@@ -10,13 +10,6 @@ export const colors = {
 	minimumTrackTintColor: 'rgba(255,255,255,0.6)',
 }
 
-export const theme = {
-	white: '#fff',
-	black: '#000',
-	grayBG: '#e5e5e5',
-	neutral: (opacity) => 'rgba(10, 10,10, ${opacity})',
-}
-
 export const fontSize = {
 	xs: 12,
 	sm: 16,

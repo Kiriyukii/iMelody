@@ -1,6 +1,6 @@
 import { colors, fontSize } from '@/constants/tokens'
 import { StyleSheet } from 'react-native'
-const defaultStyles = StyleSheet.create({
+export const defaultStyles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: colors.background,
@@ -11,4 +11,10 @@ const defaultStyles = StyleSheet.create({
 	},
 })
 
-export const utilStyles = StyleSheet.create({})
+export const utilStyles = StyleSheet.create({
+	itemSeparator: {
+		borderColor: colors.textMuted,
+		borderWidth: StyleSheet.hairlineWidth,
+		opacity: 0.3,
+	},
+})
