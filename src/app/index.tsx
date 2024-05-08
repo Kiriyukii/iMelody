@@ -9,7 +9,7 @@ import { colors, fontSize } from '@/constants/tokens'
 import { useRouter } from 'expo-router'
 import TrackPlayer from 'react-native-track-player'
 
-TrackPlayer.registerPlaybackService(() => require('./services'))
+TrackPlayer.registerPlaybackService(() => require('@/constants/services'))
 
 const WelcomeScreen = () => {
 	const router = useRouter()
