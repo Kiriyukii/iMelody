@@ -4,13 +4,13 @@ import { StyleSheet, Text, TouchableOpacity, View, ViewProps } from 'react-nativ
 import FastImage from 'react-native-fast-image'
 import { useActiveTrack } from 'react-native-track-player'
 import { PlayPauseButton, SkipToNextButton } from './PlayerControls'
+import { useLastActiveTrack } from '../hooks/useLastActiveTrack'
 
 export const FloatingPlayer = ({ style }: ViewProps) => {
 	const activeTrack = useActiveTrack()
-	const displayedTrack = activeTrack ?? {
-		title: 'Test snogs',
-	}
-	if (!activeTrack) return null
+	const lastActiveTrack = useLastActiveTrack()
+	const displayedTrack = activeTrack ?? lastActiveTrack
+	if (!displayedTrack) return null
 
 	return (
 		<TouchableOpacity activeOpacity={0.9} style={[styles.container, style]}>

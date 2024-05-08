@@ -7,6 +7,9 @@ import { LinearGradient } from 'expo-linear-gradient'
 import Animated, { FadeInDown } from 'react-native-reanimated'
 import { colors, fontSize } from '@/constants/tokens'
 import { useRouter } from 'expo-router'
+import TrackPlayer from 'react-native-track-player'
+
+TrackPlayer.registerPlaybackService(() => require('./services'))
 
 const WelcomeScreen = () => {
 	const router = useRouter()
