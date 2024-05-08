@@ -1,6 +1,6 @@
 import { unknownTrackImageUri } from '@/constants/images'
 import { colors, fontSize, screenPadding } from '@/constants/tokens'
-import { defaultStyles } from '@/styles'
+import { defaultStyles, utilStyles } from '@/styles'
 import { useRouter } from 'expo-router'
 import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import FastImage from 'react-native-fast-image'
@@ -8,6 +8,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useActiveTrack } from 'react-native-track-player'
 import { MovingText } from './components/MovingText'
 import { FontAwesome } from '@expo/vector-icons'
+import { PlayerControls } from './components/PlayerControls'
+import { PlayerProgressBar } from './components/PlayerProgressBar'
+import { PlayerVolumeBar } from './components/PlayerVolumeBar'
+import { PlayerRepeatToggle } from './components/PlayerRepeatToggle'
 
 const PlayerScreen = () => {
 	const activeTrack = useActiveTrack()
@@ -69,6 +73,12 @@ const PlayerScreen = () => {
 								</Text>
 							)}
 						</View>
+						<PlayerProgressBar style={{ marginTop: 32 }} />
+						<PlayerControls style={{ marginTop: 40 }} />
+					</View>
+					<PlayerVolumeBar style={{ marginTop: 'auto', marginBottom: 30 }} />
+					<View style={utilStyles.centeredRow}>
+						<PlayerRepeatToggle size={30} style={{ marginBottom: 6 }} />
 					</View>
 				</View>
 			</View>
