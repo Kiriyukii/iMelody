@@ -12,6 +12,10 @@ export const defaultStyles = StyleSheet.create({
 })
 
 export const utilStyles = StyleSheet.create({
+	slider: {
+		height: 7,
+		borderRadius: 16,
+	},
 	itemSeparator: {
 		borderColor: colors.textMuted,
 		borderWidth: StyleSheet.hairlineWidth,
@@ -29,5 +33,10 @@ export const utilStyles = StyleSheet.create({
 		opacity: 0.3,
 		alignSelf: 'center',
 		marginTop: 40,
+	},
+	centeredRow: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 })

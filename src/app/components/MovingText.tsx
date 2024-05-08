@@ -55,6 +55,7 @@ export const MovingText = ({ text, animationThreshold, style }: MovingTextProps)
 				animatedStyle,
 				shouldAnimate && {
 					width: 9999,
+					paddingLeft: 16,
 				},
 			]}
 		>
