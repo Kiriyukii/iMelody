@@ -17,7 +17,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 
 const PlayerScreen = () => {
 	const activeTrack = useActiveTrack()
-	const { imagesColors } = usePlayerBackground(activeTrack?.artwork ?? unknownTrackImageUri)
+	//const { imagesColors } = usePlayerBackground(activeTrack?.artwork ?? unknownTrackImageUri)
 
 	const { top, bottom } = useSafeAreaInsets()
 	const isFavorite = false
@@ -32,10 +32,7 @@ const PlayerScreen = () => {
 		)
 	}
 	return (
-		<LinearGradient
-			style={{ flex: 1 }}
-			colors={imagesColors ? [imagesColors.dominant, imagesColors.vibrant] : [colors.background]}
-		>
+		<LinearGradient style={{ flex: 1 }} colors={['#EE5A24', colors.primary, 'transparent']}>
 			<View style={styles.overlayContainer}>
 				<DismissPlayerSymbol />
 				<View style={{ flex: 1, marginTop: top + 70, marginBottom: bottom }}>

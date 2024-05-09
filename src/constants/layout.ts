@@ -6,5 +6,4 @@ export const StackScreenWithSearchBar: NativeStackNavigationOptions = {
 	headerStyle: { backgroundColor: colors.background },
 	headerTintColor: colors.text,
 	headerShadowVisible: false,
-	headerIconColor: colors.icon,
 }

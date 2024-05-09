@@ -11,8 +11,6 @@ const FavoritesScreenLayout = () => {
 					name="index"
 					options={{
 						headerTitle: 'Favorites',
-						headerStyle: { backgroundColor: colors.background },
-						headerTintColor: '#fff',
 					}}
 				/>
 			</Stack>
