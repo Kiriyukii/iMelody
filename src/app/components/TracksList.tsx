@@ -5,16 +5,33 @@ import { utilStyles } from '@/styles'
 import TrackPlayer, { Track } from 'react-native-track-player'
 import FastImage from 'react-native-fast-image'
 import { unknownTrackImageUri } from '@/constants/images'
+import { useQueue } from '@/store/queue'
+import { useRef } from 'react'
 
 export type TracksListProps = Partial<FlatListProps<Track>> & {
+	id: string
 	tracks: Track[]
 }
 const ItemDivider = () => (
 	<View style={{ ...utilStyles.itemSeparator, marginVertical: 9, marginLeft: 60 }} />
 )
-export const TracksList = ({ tracks, ...flatlistProps }: TracksListProps) => {
-	const handleTrackSelect = async (track: Track) => {
-		await TrackPlayer.load(track)
+export const TracksList = ({ id, tracks, ...flatlistProps }: TracksListProps) => {
+	const queueOffset = useRef(0)
+
+	const { activeQueueId, setActiveQueueId } = useQueue()
+
+	const handleTrackSelect = async (selectedTrack: Track) => {
+		const trackIndex = tracks.findIndex((track) => track.url === selectedTrack.url)
+
+		if (trackIndex === -1) return
+
+		const isChangingQueue = id !== activeQueueId
+
+		if (isChangingQueue) {
+		} else {
+		}
+		// await TrackPlayer.load(track)
+		// await TrackPlayer.play()
 	}
 	return (
 		<FlatList
