@@ -5,7 +5,7 @@ import { useNavigation } from 'expo-router'
 
 const defaultSearchOptions: SearchBarProps = {
 	textColor: '#fff',
-	barTintColor: '#707371',
+	//barTintColor: '#707371',
 }
 
 export const useNavigationSearch = ({
