@@ -1,10 +1,25 @@
+import { TracksList } from '@/app/components/TracksList'
+import { screenPadding } from '@/constants/tokens'
 import { defaultStyles } from '@/styles'
-import { Text, View } from 'react-native'
+import library from '@/assets/data/library.json'
+import { ScrollView, Text, View } from 'react-native'
+import { useMemo } from 'react'
+import { useNavigationSearch } from '@/app/hooks/useNavigationSearch'
 
 const FavoritesScreen = () => {
+	const search = useNavigationSearch({
+		searchBarOptions: {
+			placeholder: 'Find in Songs',
+		},
+	})
+	const favoritesTracks = useMemo(() => {
+		return library.filter((track) => track.rating === 1)
+	}, [])
 	return (
 		<View style={defaultStyles.container}>
-			<Text style={defaultStyles.text}>Favorites Screen</Text>
+			<ScrollView style={{ paddingHorizontal: screenPadding.horizontal }}>
+				<TracksList tracks={favoritesTracks} scrollEnabled={false} />
+			</ScrollView>
 		</View>
 	)
 }

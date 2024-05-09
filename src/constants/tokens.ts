@@ -3,9 +3,9 @@ import { opacity } from 'react-native-reanimated/lib/typescript/reanimated2/Colo
 export const colors = {
 	primary: '#f5801f',
 	background: '#000',
-	text: '#fff',
+	text: '#ffffff',
 	textMuted: '#9ca3af',
-	icon: '#fff',
+	icon: '#ffffff',
 	maximumTrackTintColor: 'rgba(255,255,255,0.4)',
 	minimumTrackTintColor: 'rgba(255,255,255,0.6)',
 }

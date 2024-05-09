@@ -5,10 +5,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { colors } from '@/constants/tokens'
 import { useTrackPlayerRepeatMode } from '../hooks/useTrackPlayerRepeatMode'
 
-const repeatOrder = [RepeatMode.Off, RepeatMode.Track, RepeatMode.Queue] as const
-
 type IconProps = Omit<ComponentProps<typeof MaterialCommunityIcons>, 'name'>
 type IconName = ComponentProps<typeof MaterialCommunityIcons>['name']
+
+const repeatOrder = [RepeatMode.Off, RepeatMode.Track, RepeatMode.Queue] as const
 
 export const PlayerRepeatToggle = ({ ...iconProps }: IconProps) => {
 	const { repeatMode, changeRepeatMode } = useTrackPlayerRepeatMode()

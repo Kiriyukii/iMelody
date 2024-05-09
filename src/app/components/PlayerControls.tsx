@@ -23,7 +23,7 @@ export const PlayerControls = ({ style }: PlayerControlsProps) => {
 	)
 }
 
-export const PlayPauseButton = ({ style, iconSize }: PlayerButtonProps) => {
+export const PlayPauseButton = ({ style, iconSize = 48 }: PlayerButtonProps) => {
 	const { playing } = useIsPlaying()
 	return (
 		<View style={[{ height: iconSize }, style]}>

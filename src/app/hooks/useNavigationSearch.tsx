@@ -4,8 +4,8 @@ import { useLayoutEffect, useState } from 'react'
 import { useNavigation } from 'expo-router'
 
 const defaultSearchOptions: SearchBarProps = {
-	tintColor: colors.primary,
-	hideWhenScrolling: false,
+	textColor: '#fff',
+	barTintColor: '#707371',
 }
 
 export const useNavigationSearch = ({
@@ -24,6 +24,8 @@ export const useNavigationSearch = ({
 	useLayoutEffect(() => {
 		navigation.setOptions({
 			headerSearchBarOptions: {
+				placeholderTextColor: 'white',
+				headerIconColor: colors.icon,
 				...defaultSearchOptions,
 				...searchBarOptions,
 				onChangeText: handleOnChangeText,
