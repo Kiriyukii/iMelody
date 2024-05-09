@@ -2,6 +2,7 @@ import { TrackWithPlaylist } from '@/helpers/types'
 import { Track } from 'react-native-track-player'
 import { create } from 'zustand'
 import library from '@/assets/data/library.json'
+
 interface LibraryState {
 	tracks: TrackWithPlaylist[]
 	toggleTrackFavorite: (track: Track) => void
@@ -19,4 +20,9 @@ export const useTracks = () => useLibraryStore((state) => state.tracks)
 export const useFavorites = () => {
 	const favorites = useLibraryStore((state) => state.tracks.filter((track) => track.rating === 1))
 	const toggleTrackFavorite = useLibraryStore((state) => state.toggleTrackFavorite)
+
+	return {
+		favorites,
+		toggleTrackFavorite,
+	}
 }

@@ -26,7 +26,7 @@ const FavoritesScreen = () => {
 	return (
 		<View style={defaultStyles.container}>
 			<ScrollView style={{ paddingHorizontal: screenPadding.horizontal }}>
-				<TracksList tracks={favoritesTracks} scrollEnabled={false} />
+				<TracksList tracks={filteredFavoritesTracks} scrollEnabled={false} />
 			</ScrollView>
 		</View>
 	)
