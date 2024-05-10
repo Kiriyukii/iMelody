@@ -10,7 +10,7 @@ const ArtistsScreenLayout = () => {
 			<Stack>
 				<Stack.Screen
 					name="index"
-					options={{ headerTitle: 'Artists', ...StackScreenWithSearchBar }}
+					options={{ ...StackScreenWithSearchBar, headerTitle: 'Artists' }}
 				/>
 				<Stack.Screen
 					name="[name]"

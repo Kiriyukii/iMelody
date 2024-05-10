@@ -8,8 +8,9 @@ import Animated, { FadeInDown } from 'react-native-reanimated'
 import { colors, fontSize } from '@/constants/tokens'
 import { useRouter } from 'expo-router'
 import TrackPlayer from 'react-native-track-player'
+import { playbackServices } from '@/constants/services'
 
-TrackPlayer.registerPlaybackService(() => require('@/constants/services'))
+TrackPlayer.registerPlaybackService(() => playbackServices)
 
 const WelcomeScreen = () => {
 	const router = useRouter()

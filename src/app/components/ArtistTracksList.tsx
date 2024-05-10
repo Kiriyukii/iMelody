@@ -8,7 +8,7 @@ import { generateTracksListId } from '@/helpers/miscellanious'
 import { StyleSheet, View, Text } from 'react-native'
 import { unknownArtistImageUri } from '@/constants/images'
 import FastImage from 'react-native-fast-image'
-import { defaultStyles } from '@/styles'
+import { defaultStyles, utilStyles } from '@/styles'
 import { fontSize } from '@/constants/tokens'
 import { QueueControls } from './QueueControls'
 
@@ -49,7 +49,7 @@ export const ArtistTracksList = ({ artist }: { artist: Artist }) => {
 					)}
 				</View>
 			}
-			tracks={artist.tracks}
+			tracks={filteredArtistTracks}
 		/>
 	)
 }

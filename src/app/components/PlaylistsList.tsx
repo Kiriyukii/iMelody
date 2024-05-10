@@ -6,7 +6,7 @@ import { playlistNameFilter } from '@/helpers/filter'
 import { FlatList } from 'react-native-gesture-handler'
 import { utilStyles } from '@/styles'
 import FastImage from 'react-native-fast-image'
-import { unknownArtistImageUri } from '@/constants/images'
+import { unknownArtistImageUri, unknownTrackImageUri } from '@/constants/images'
 import { PlaylistListItem } from './PlaylistListItem'
 
 type PlaylistsListProps = {
@@ -43,7 +43,7 @@ export const PlaylistsList = ({
 					<Text style={utilStyles.emptyComponentText}>No playlist found!</Text>
 					<FastImage
 						source={{
-							uri: unknownArtistImageUri,
+							uri: unknownTrackImageUri,
 							priority: FastImage.priority.normal,
 						}}
 						style={utilStyles.emptyContentImage}

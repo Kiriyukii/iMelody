@@ -14,7 +14,7 @@ const ItemSeparatorComponent = () => {
 	return <View style={[utilStyles.itemSeparator, { marginLeft: 50, marginVertical: 12 }]} />
 }
 
-const ArtistsLayout = () => {
+const ArtistsScreen = () => {
 	const search = useNavigationSearch({
 		searchBarOptions: {
 			placeholder: 'Find in Artists',
@@ -26,7 +26,7 @@ const ArtistsLayout = () => {
 		if (!search) return artists
 
 		return artists.filter(artistNameFilter(search))
-	}, [])
+	}, [artists, search])
 
 	return (
 		<View style={defaultStyles.container}>
@@ -38,7 +38,7 @@ const ArtistsLayout = () => {
 					ListFooterComponent={ItemSeparatorComponent}
 					ListEmptyComponent={
 						<View>
-							<Text>No artists found!</Text>
+							<Text style={utilStyles.emptyComponentText}>No artists found!</Text>
 							<FastImage
 								source={{ uri: unknownArtistImageUri, priority: FastImage.priority.normal }}
 								style={utilStyles.emptyContentImage}
@@ -94,4 +94,4 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default ArtistsLayout
+export default ArtistsScreen

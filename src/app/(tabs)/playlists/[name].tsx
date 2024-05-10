@@ -1,6 +1,4 @@
-import { ArtistTracksList } from '@/app/components/ArtistTracksList'
 import { PlaylistTracksList } from '@/app/components/PlaylistTracksList'
-import { PlaylistsList } from '@/app/components/PlaylistsList'
 import { screenPadding } from '@/constants/tokens'
 import { usePlaylists } from '@/store/library'
 import { defaultStyles } from '@/styles'
