@@ -14,15 +14,14 @@ import { PlayerVolumeBar } from './components/PlayerVolumeBar'
 import { PlayerRepeatToggle } from './components/PlayerRepeatToggle'
 import { usePlayerBackground } from './hooks/usePlayerBackground'
 import { LinearGradient } from 'expo-linear-gradient'
+import { useTrackPlayerFavorite } from './hooks/useTrackPlayerFavorite'
 
 const PlayerScreen = () => {
 	const activeTrack = useActiveTrack()
 	//const { imagesColors } = usePlayerBackground(activeTrack?.artwork ?? unknownTrackImageUri)
 
 	const { top, bottom } = useSafeAreaInsets()
-	const isFavorite = false
-
-	const toggleFavorite = () => {}
+	const { isFavorite, toggleFavorite } = useTrackPlayerFavorite()
 
 	if (!activeTrack) {
 		return (
@@ -66,7 +65,7 @@ const PlayerScreen = () => {
 									<FontAwesome
 										name={isFavorite ? 'heart' : 'heart-o'}
 										size={20}
-										color={isFavorite ? colors.primary : colors.icon}
+										color={isFavorite ? '#fc3c44' : colors.icon}
 										style={{ marginHorizontal: 14 }}
 										onPress={toggleFavorite}
 									/>
@@ -82,7 +81,7 @@ const PlayerScreen = () => {
 						</View>
 						<PlayerVolumeBar style={{ marginTop: 'auto', marginBottom: 30 }} />
 						<View style={utilStyles.centeredRow}>
-							<PlayerRepeatToggle size={30} style={{ marginBottom: 6 }} />
+							<PlayerRepeatToggle size={30} style={{ marginBottom: 16 }} />
 						</View>
 					</View>
 				</View>
