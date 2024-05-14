@@ -33,7 +33,7 @@ const WelcomeScreen = () => {
 						Every Song Tells a Story
 					</Animated.Text>
 					<Animated.View entering={FadeInDown.delay(600).springify()}>
-						<Pressable onPress={() => router.push('/(tabs)/(songs)')} style={styles.startButton}>
+						<Pressable onPress={() => router.push('/signIn')} style={styles.startButton}>
 							<Text style={styles.startText}>Start Explore</Text>
 						</Pressable>
 					</Animated.View>

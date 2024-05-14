@@ -10,6 +10,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { colors } from '@/constants/tokens'
 import TrackPlayer from 'react-native-track-player'
 import { playbackServices } from '../constants/services'
+import { AuthProvider } from '@/context/AuthContext'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -26,12 +27,14 @@ const App = () => {
 
 	useLogTrackPlayerState()
 	return (
-		<SafeAreaProvider>
-			<GestureHandlerRootView style={{ flex: 1 }}>
-				<RootNavigation />
-				<StatusBar style="auto" />
-			</GestureHandlerRootView>
-		</SafeAreaProvider>
+		<AuthProvider>
+			<SafeAreaProvider>
+				<GestureHandlerRootView style={{ flex: 1 }}>
+					<RootNavigation />
+					<StatusBar style="auto" />
+				</GestureHandlerRootView>
+			</SafeAreaProvider>
+		</AuthProvider>
 	)
 }
 
@@ -65,6 +68,8 @@ const RootNavigation = () => {
 					},
 				}}
 			/>
+			<Stack.Screen name="(auth)/signIn" options={{ headerShown: false }} />
+			<Stack.Screen name="(auth)/signUp" options={{ headerShown: false }} />
 		</Stack>
 	)
 }
