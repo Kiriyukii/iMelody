@@ -2,7 +2,7 @@ import { colors, fontSize } from '@/constants/tokens'
 import { BlurView } from 'expo-blur'
 import { Tabs } from 'expo-router'
 import { StyleSheet } from 'react-native'
-import { MaterialIcons, FontAwesome6, Ionicons } from '@expo/vector-icons'
+import { MaterialIcons, FontAwesome6, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { FloatingPlayer } from '../components/FloatingPlayer'
 
 const TabsNavigation = () => {
@@ -64,6 +64,15 @@ const TabsNavigation = () => {
 					options={{
 						title: 'Artists',
 						tabBarIcon: ({ color }) => <FontAwesome6 name="users-line" size={24} color={color} />,
+					}}
+				/>
+				<Tabs.Screen
+					name="settings"
+					options={{
+						title: 'Settings',
+						tabBarIcon: ({ color }) => (
+							<MaterialCommunityIcons name="account-settings" size={24} color={color} />
+						),
 					}}
 				/>
 			</Tabs>
