@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
 	View,
 	TextInput,
@@ -9,6 +9,7 @@ import {
 	Text,
 	ImageBackground,
 	TouchableOpacity,
+	Alert,
 } from 'react-native'
 import { useAuth } from '@/context/AuthContext'
 import { useRouter } from 'expo-router'
@@ -18,13 +19,23 @@ import { LinearGradient } from 'expo-linear-gradient'
 import SocialMedia from '../components/SocialMedia'
 
 export default function SignIn() {
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
+	const emailRef = useRef('')
+	const passwordRef = useRef('')
 	const { signIn } = useAuth()
 	const router = useRouter()
 
-	const handleSignIn = () => {
-		signIn({ email, password })
+	const handleSignIn = async () => {
+		if (!emailRef.current || !passwordRef.current) {
+			Alert.alert('Sign Up', 'Please fill all the fields!')
+			return
+		}
+		const response = await signIn(emailRef.current, passwordRef.current)
+
+		console.log('get result', response)
+
+		if (!response.success) {
+			return Alert.alert('Sign Up', response.msg)
+		}
 		router.push('/(tabs)/(songs)')
 	}
 	const handlePress = () => {
@@ -38,15 +49,13 @@ export default function SignIn() {
 				<View style={styles.inputContainer}>
 					<TextInput
 						placeholder="Email"
-						value={email}
-						onChangeText={setEmail}
+						onChangeText={(value) => (emailRef.current = value)}
 						style={styles.input}
 					/>
 					<TextInput
 						placeholder="Password"
 						secureTextEntry
-						value={password}
-						onChangeText={setPassword}
+						onChangeText={(value) => (passwordRef.current = value)}
 						style={styles.input}
 					/>
 					<TouchableOpacity onPress={handlePress}>

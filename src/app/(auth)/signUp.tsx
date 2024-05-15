@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import {
 	View,
 	TextInput,
@@ -7,6 +7,7 @@ import {
 	Pressable,
 	Text,
 	TouchableOpacity,
+	Alert,
 } from 'react-native'
 import { useAuth } from '@/context/AuthContext'
 import { useRouter } from 'expo-router'
@@ -16,19 +17,28 @@ import { LinearGradient } from 'expo-linear-gradient'
 import SocialMedia from '../components/SocialMedia'
 
 export default function SignUp() {
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
-	const [confirmPassword, setConfirmPassword] = useState('')
 	const { signUp } = useAuth()
 	const router = useRouter()
+	const emailRef = useRef('')
+	const passwordRef = useRef('')
+	const confirmPasswordRef = useRef('')
 
-	const handleSignUp = () => {
-		if (password !== confirmPassword) {
-			alert('Passwords do not match!')
+	const handleSignUp = async () => {
+		if (!emailRef.current || !passwordRef.current || !confirmPasswordRef.current) {
+			Alert.alert('Sign Up', 'Please fill all the fields!')
 			return
 		}
-		signUp({ email, password })
-		router.push('/(tabs)/(songs)')
+		if (passwordRef.current !== confirmPasswordRef.current) {
+			alert('Password must be match.')
+			return
+		}
+		let response = await signUp(emailRef.current, passwordRef.current)
+
+		console.log('get result', response)
+
+		if (!response.success) {
+			return Alert.alert('Sign Up', response.msg)
+		}
 	}
 
 	return (
@@ -38,22 +48,19 @@ export default function SignUp() {
 				<View style={styles.inputContainer}>
 					<TextInput
 						placeholder="Email"
-						value={email}
-						onChangeText={setEmail}
+						onChangeText={(value) => (emailRef.current = value)}
 						style={styles.input}
 					/>
 					<TextInput
 						placeholder="Password"
 						secureTextEntry
-						value={password}
-						onChangeText={setPassword}
+						onChangeText={(value) => (passwordRef.current = value)}
 						style={styles.input}
 					/>
 					<TextInput
 						placeholder="Confirm Password"
 						secureTextEntry
-						value={confirmPassword}
-						onChangeText={setConfirmPassword}
+						onChangeText={(value) => (confirmPasswordRef.current = value)}
 						style={styles.input}
 					/>
 					<Pressable style={styles.button} onPress={handleSignUp}>

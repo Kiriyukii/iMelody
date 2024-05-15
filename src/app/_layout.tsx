@@ -1,22 +1,25 @@
 import { StatusBar } from 'expo-status-bar'
-import { Stack } from 'expo-router'
+import { Slot, Stack, router, useSegments } from 'expo-router'
 import { StyleSheet, Text, View } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useSetupTrackPlayer } from './hooks/useSetupTrackPlayer'
 import { SplashScreen } from 'expo-router'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useLogTrackPlayerState } from './hooks/useLogTrackPlayerState'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { colors } from '@/constants/tokens'
 import TrackPlayer from 'react-native-track-player'
 import { playbackServices } from '../constants/services'
-import { AuthProvider } from '@/context/AuthContext'
+import { AuthProvider, useAuth } from '@/context/AuthContext'
 
 SplashScreen.preventAutoHideAsync()
 
 //TrackPlayer.registerPlaybackService(() => playbackServices)
 
-const App = () => {
+const RootLayout = () => {
+	const { initializing, isAuthenticated } = useAuth()
+	const segments = useSegments()
+
 	const handleTrackPlayerLoaded = useCallback(() => {
 		SplashScreen.hideAsync()
 	}, [])
@@ -25,16 +28,27 @@ const App = () => {
 		onLoad: handleTrackPlayerLoaded,
 	})
 
+	useEffect(() => {
+		if (initializing || typeof isAuthenticated === 'undefined') return
+		const inApp = segments[0] === '(tabs)'
+		if (isAuthenticated && !inApp) {
+			router.replace('/(tabs)/(songs)')
+			console.log('Test')
+		} else if (!isAuthenticated && segments[0] !== '(auth)') {
+			console.log('You need to sign in')
+			router.replace('/(auth)/signIn')
+		}
+	}, [initializing, isAuthenticated, router, segments])
+
 	useLogTrackPlayerState()
 	return (
-		<AuthProvider>
-			<SafeAreaProvider>
-				<GestureHandlerRootView style={{ flex: 1 }}>
-					<RootNavigation />
-					<StatusBar style="auto" />
-				</GestureHandlerRootView>
-			</SafeAreaProvider>
-		</AuthProvider>
+		<SafeAreaProvider>
+			<GestureHandlerRootView style={{ flex: 1 }}>
+				<Slot />
+				{/* <RootNavigation /> */}
+				<StatusBar style="auto" />
+			</GestureHandlerRootView>
+		</SafeAreaProvider>
 	)
 }
 
@@ -74,4 +88,10 @@ const RootNavigation = () => {
 	)
 }
 
-export default App
+export default function App() {
+	return (
+		<AuthProvider>
+			<RootLayout />
+		</AuthProvider>
+	)
+}
