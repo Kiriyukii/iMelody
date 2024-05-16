@@ -47,6 +47,7 @@ export function AuthProvider({ children }) {
 		try {
 			await auth().createUserWithEmailAndPassword(email, password)
 			console.log('User account created & signed in!')
+			await setDoc(doc(db, 'user'))
 			setIsAuthenticated(true)
 			return { success: true }
 		} catch (error) {
@@ -54,7 +55,6 @@ export function AuthProvider({ children }) {
 			if (msg.includes('auth/email-already-in-use')) {
 				msg = 'That email address is already in use!'
 			}
-
 			if (msg.includes('auth/invalid-email')) {
 				msg = 'That email address is invalid!'
 			}

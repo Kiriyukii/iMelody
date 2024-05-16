@@ -31,9 +31,9 @@ const RootLayout = () => {
 	useEffect(() => {
 		if (initializing || typeof isAuthenticated === 'undefined') return
 		const inApp = segments[0] === '(tabs)'
-		if (isAuthenticated && !inApp) {
+		const inPlayer = segments[0] === '(player)'
+		if (isAuthenticated && !inApp && !inPlayer) {
 			router.replace('/(tabs)/(songs)')
-			console.log('Test')
 		} else if (!isAuthenticated && segments[0] !== '(auth)') {
 			console.log('You need to sign in')
 			router.replace('/(auth)/signIn')
