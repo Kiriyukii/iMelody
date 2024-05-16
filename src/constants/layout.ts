@@ -11,3 +11,13 @@ export const StackScreenWithSearchBar: NativeStackNavigationOptions = {
 		fontSize: 26,
 	},
 }
+
+export const NormalStackScreen: NativeStackNavigationOptions = {
+	headerTitleAlign: 'left',
+	headerStyle: { backgroundColor: colors.background },
+	headerTintColor: colors.text,
+	headerShadowVisible: false,
+	headerTitleStyle: {
+		fontSize: 26,
+	},
+}

@@ -6,15 +6,15 @@ import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'rea
 import FastImage from 'react-native-fast-image'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useActiveTrack } from 'react-native-track-player'
-import { MovingText } from './components/MovingText'
+import { MovingText } from '@/app/components/MovingText'
 import { FontAwesome } from '@expo/vector-icons'
-import { PlayerControls } from './components/PlayerControls'
-import { PlayerProgressBar } from './components/PlayerProgressBar'
-import { PlayerVolumeBar } from './components/PlayerVolumeBar'
-import { PlayerRepeatToggle } from './components/PlayerRepeatToggle'
-import { usePlayerBackground } from './hooks/usePlayerBackground'
+import { PlayerControls } from '@/app/components/PlayerControls'
+import { PlayerProgressBar } from '@/app/components/PlayerProgressBar'
+import { PlayerVolumeBar } from '@/app/components/PlayerVolumeBar'
+import { PlayerRepeatToggle } from '@/app/components/PlayerRepeatToggle'
+import { usePlayerBackground } from '@/app/hooks/usePlayerBackground'
 import { LinearGradient } from 'expo-linear-gradient'
-import { useTrackPlayerFavorite } from './hooks/useTrackPlayerFavorite'
+import { useTrackPlayerFavorite } from '@/app/hooks/useTrackPlayerFavorite'
 
 const PlayerScreen = () => {
 	const activeTrack = useActiveTrack()

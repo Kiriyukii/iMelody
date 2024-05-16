@@ -1,21 +1,25 @@
 import { StatusBar } from 'expo-status-bar'
-import { Stack } from 'expo-router'
+import { Slot, Stack, router, useSegments } from 'expo-router'
 import { StyleSheet, Text, View } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useSetupTrackPlayer } from './hooks/useSetupTrackPlayer'
 import { SplashScreen } from 'expo-router'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useLogTrackPlayerState } from './hooks/useLogTrackPlayerState'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { colors } from '@/constants/tokens'
 import TrackPlayer from 'react-native-track-player'
 import { playbackServices } from '../constants/services'
+import { AuthProvider, useAuth } from '@/context/AuthContext'
 
 SplashScreen.preventAutoHideAsync()
 
 //TrackPlayer.registerPlaybackService(() => playbackServices)
 
-const App = () => {
+const RootLayout = () => {
+	const { initializing, isAuthenticated } = useAuth()
+	const segments = useSegments()
+
 	const handleTrackPlayerLoaded = useCallback(() => {
 		SplashScreen.hideAsync()
 	}, [])
@@ -24,11 +28,24 @@ const App = () => {
 		onLoad: handleTrackPlayerLoaded,
 	})
 
+	useEffect(() => {
+		if (initializing || typeof isAuthenticated === 'undefined') return
+		const inApp = segments[0] === '(tabs)'
+		const inPlayer = segments[0] === '(player)'
+		if (isAuthenticated && !inApp && !inPlayer) {
+			router.replace('/(tabs)/(songs)')
+		} else if (!isAuthenticated && segments[0] !== '(auth)') {
+			console.log('You need to sign in')
+			router.replace('/(auth)/signIn')
+		}
+	}, [initializing, isAuthenticated, router, segments])
+
 	useLogTrackPlayerState()
 	return (
 		<SafeAreaProvider>
 			<GestureHandlerRootView style={{ flex: 1 }}>
-				<RootNavigation />
+				<Slot />
+				{/* <RootNavigation /> */}
 				<StatusBar style="auto" />
 			</GestureHandlerRootView>
 		</SafeAreaProvider>
@@ -65,8 +82,16 @@ const RootNavigation = () => {
 					},
 				}}
 			/>
+			<Stack.Screen name="(auth)/signIn" options={{ headerShown: false }} />
+			<Stack.Screen name="(auth)/signUp" options={{ headerShown: false }} />
 		</Stack>
 	)
 }
 
-export default App
+export default function App() {
+	return (
+		<AuthProvider>
+			<RootLayout />
+		</AuthProvider>
+	)
+}
